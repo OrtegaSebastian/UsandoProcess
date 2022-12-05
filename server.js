@@ -31,7 +31,9 @@ const User = require('./models');
 //configuraciones
 const config = require('./config')
 const controllersdb = require('./controllersdb')
-const routes = require('./routes');
+const routes = require('./routers/routes');
+const router = require('./routers') 
+
 
 // Configuracion de las vistas
 app.engine('.hbs', exphbs.engine({ extname: '.hbs', defaultLayout: 'main.hbs' }));
@@ -167,11 +169,11 @@ app.get('/logout', routes.getLogout);
 
 //Desafío process
 
-app.get('/info',(req,res)=>{
+app.get('/info',router,(req,res)=>{
     
 })
 
-app.get('/random',(req,res)=>{
+app.get('/randoms',router,(req,res)=>{
 
 })
 
@@ -181,6 +183,7 @@ app.get('/random',(req,res)=>{
 //  LISTEN SERVER
 // ------------------------------------------------------------------------------
 
+//usando env
 controllersdb.conectarDB(process.env.URL_BASE_DE_DATOS, err => {
 
     if (err) return console.log('error en conexión de base de datos', err);
