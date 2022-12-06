@@ -4,7 +4,7 @@ const app = express();
 const bCrypt = require('bcrypt')
 const session = require('express-session');
 const argv = require('argv')
-
+const ParseArgs = require('minimist')
 
 //DotEnv
 if(process.env.NODE_ENV !='Production'){
@@ -177,8 +177,22 @@ app.get('/randoms',router,(req,res)=>{
 
 })
 
+const options ={
+    alias:{
+        m:"modo",
+        p:"port",
+        d:"debug"
+    },
+    default:{
+        modo:'prod',
+        port:'8080',
+        debug: false
+    }
+}
 
+const argv = process.argv;
 
+const {modo,port,debug,_} = ParseArgs(argv,options)
 // ------------------------------------------------------------------------------
 //  LISTEN SERVER
 // ------------------------------------------------------------------------------
